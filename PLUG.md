@@ -1,5 +1,5 @@
 ---
-name: Library/silverbullet-simplemindmap
+name: Library/sewellzhong/silverbullet-simplemindmap/PLUG
 tags: meta/library
 files:
   - simplemindmap.plug.js
@@ -9,12 +9,20 @@ files:
 
 Readonly rendering for Obsidian Simple mind map `.smm.md` pages.
 
+Install this library with `Library: Install`:
+
+```text
+https://github.com/sewellzhong/silverbullet-simplemindmap/blob/main/PLUG.md
+```
+
+Then run `Plugs: Update`.
+
+If you install the plug directly from `CONFIG`, use this exact value:
+
 ```lua
 config.set {
   plugs = {
-    "github:<your-user>/silverbullet-simplemindmap/simplemindmap.plug.js"
+    "github:sewellzhong/silverbullet-simplemindmap/simplemindmap.plug.js"
   }
 }
 ```
-
-Run `Plugs: Update`, then open a `.smm.md` page or run `SimpleMindMap: Preview Current Page`.

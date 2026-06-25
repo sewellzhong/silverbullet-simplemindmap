@@ -4,17 +4,25 @@ Readonly rendering for Obsidian Simple mind map `.smm.md` content in SilverBulle
 
 ## Install
 
-After publishing this repository to GitHub, add the compiled plug to your SilverBullet `CONFIG` page:
+Use `Library: Install` in SilverBullet with this URI:
+
+```text
+https://github.com/sewellzhong/silverbullet-simplemindmap/blob/main/PLUG.md
+```
+
+Then run `Plugs: Update`.
+
+If you prefer direct plug installation through the SilverBullet `CONFIG` page, use this exact value:
 
 ```lua
 config.set {
   plugs = {
-    "github:<your-user>/silverbullet-simplemindmap/simplemindmap.plug.js"
+    "github:sewellzhong/silverbullet-simplemindmap/simplemindmap.plug.js"
   }
 }
 ```
 
-Then run `Plugs: Update`.
+Do not keep an empty string or placeholder such as `<your-user>` in `plugs`; the plug manager will report `Could not resolve plug uri`.
 
 ## Usage
 
