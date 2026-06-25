@@ -1,0 +1,77 @@
+:root {
+  --smm-surface: #ffffff;
+  --smm-surface-muted: #f7f8fa;
+  --smm-text: #1f2328;
+  --smm-text-muted: #667085;
+  --smm-border: #d9dee7;
+  --smm-accent: #2f6fed;
+  --smm-error: #b42318;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --smm-surface: #111318;
+    --smm-surface-muted: #191c22;
+    --smm-text: #f4f6f8;
+    --smm-text-muted: #a5adba;
+    --smm-border: #343944;
+    --smm-accent: #6ea2ff;
+    --smm-error: #ff8a7a;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--smm-surface);
+  color: var(--smm-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.smm-viewer {
+  position: relative;
+  width: 100%;
+  min-height: 160px;
+  overflow: hidden;
+  border: 1px solid var(--smm-border);
+  background: var(--smm-surface);
+}
+
+.smm-map {
+  width: 100%;
+  height: 100%;
+}
+
+.smm-state {
+  position: absolute;
+  inset: 16px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid var(--smm-border);
+  background: var(--smm-surface-muted);
+  color: var(--smm-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.smm-state strong {
+  color: var(--smm-text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.smm-state-error {
+  color: var(--smm-error);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .smm-state {
+    transition: opacity 120ms ease-out;
+  }
+}

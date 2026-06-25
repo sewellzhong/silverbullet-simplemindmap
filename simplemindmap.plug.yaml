@@ -1,0 +1,12 @@
+name: simplemindmap
+version: 0.1
+assets:
+  - "assets/**/*.*"
+functions:
+  renderMetadata:
+    path: "./src/simplemindmap.ts:renderMetadata"
+    codeWidget: metadata
+  previewCurrentPage:
+    path: "./src/simplemindmap.ts:previewCurrentPage"
+    command:
+      name: "SimpleMindMap: Preview Current Page"

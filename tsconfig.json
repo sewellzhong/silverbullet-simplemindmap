@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "types": ["bun-types"],
+    "paths": {
+      "@silverbulletmd/silverbullet/syscalls": ["./src/silverbullet-shims/syscalls.d.ts"],
+      "@silverbulletmd/silverbullet/type/client": ["./src/silverbullet-shims/client.d.ts"]
+    },
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+    "incremental": true
+  },
+  "include": ["src", "tests", "scripts"],
+  "exclude": ["node_modules", "*.plug.js"]
+}
