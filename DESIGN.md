@@ -10,6 +10,7 @@ A quiet document utility. The viewer should disappear behind the mind map, with 
 |------|-------|-------|------|-------|
 | Surface/primary | --smm-surface | #ffffff | #111318 | Viewer background |
 | Surface/secondary | --smm-surface-muted | #f7f8fa | #191c22 | Empty and error panels |
+| Canvas | --smm-canvas | #f7f8fa | #2f3438 | Mind map canvas when the source file has no saved background |
 | Text/primary | --smm-text | #1f2328 | #f4f6f8 | Status text |
 | Text/secondary | --smm-text-muted | #667085 | #a5adba | Secondary text |
 | Border/default | --smm-border | #d9dee7 | #343944 | Panel borders |
@@ -27,7 +28,7 @@ Primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif. M
 
 ## 4. Spacing & Layout
 
-Base unit: 4px. Viewer padding uses 16px, compact gaps use 8px, and status panels use 24px.
+Base unit: 4px. Viewer padding uses 16px, compact gaps use 8px, and status panels use 24px. Full-page previews use the full panel height.
 
 ## 5. Components
 

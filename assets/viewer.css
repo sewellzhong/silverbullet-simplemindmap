@@ -1,6 +1,7 @@
 :root {
-  --smm-surface: #ffffff;
-  --smm-surface-muted: #f7f8fa;
+  --smm-surface: transparent;
+  --smm-surface-muted: rgba(247, 248, 250, 0.92);
+  --smm-canvas: #f7f8fa;
   --smm-text: #1f2328;
   --smm-text-muted: #667085;
   --smm-border: #d9dee7;
@@ -10,8 +11,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --smm-surface: #111318;
-    --smm-surface-muted: #191c22;
+    --smm-surface: transparent;
+    --smm-surface-muted: rgba(25, 28, 34, 0.92);
+    --smm-canvas: #2f3438;
     --smm-text: #f4f6f8;
     --smm-text-muted: #a5adba;
     --smm-border: #343944;
@@ -34,7 +36,7 @@ body {
   width: 100%;
   min-height: 160px;
   overflow: hidden;
-  border: 1px solid var(--smm-border);
+  border: 0;
   background: var(--smm-surface);
 }
 

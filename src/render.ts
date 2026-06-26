@@ -7,9 +7,6 @@ export type RenderAssets = {
   readonly viewerCss: string
 }
 
-const SUPPORTED_THEMES = ["default"] as const
-const SUPPORTED_THEME_NAMES: ReadonlySet<string> = new Set(SUPPORTED_THEMES)
-
 export function renderDocumentWidget(
   document: MindMapDocument,
   config: PlugConfig,
@@ -52,14 +49,20 @@ const MindMapCtor = globalThis.simpleMindMap?.default || globalThis.simpleMindMa
 if (!container || !MindMapCtor) {
   throw new Error("SimpleMindMap runtime failed to initialize");
 }
+const canvasColor = getComputedStyle(document.documentElement).getPropertyValue("--smm-canvas").trim();
+const themeConfig = {
+  ...data.theme.config,
+  backgroundColor: data.theme.config.backgroundColor ?? canvasColor,
+};
 const mindMap = new MindMapCtor({
   el: container,
   data: data.root,
   layout: data.layout,
   theme: data.theme.template,
-  themeConfig: data.theme.config,
+  themeConfig,
   readonly: true,
   fit: options.fit,
+  mousewheelAction: "zoom",
 });
 loading?.remove();
 const resizeObserver = new ResizeObserver(() => mindMap.resize());
@@ -77,6 +80,12 @@ setTimeout(() => {
     mindMap.view.fit();
   }
 }, 0);
+setTimeout(() => {
+  mindMap.resize();
+  if (options.fit) {
+    mindMap.view.fit();
+  }
+}, 120);
 `
 }
 
@@ -85,13 +94,9 @@ function withConfigOverrides(document: MindMapDocument, config: PlugConfig): Min
     ...document,
     theme: {
       ...document.theme,
-      template: resolveTheme(config.theme ?? document.theme.template),
+      template: config.theme ?? document.theme.template,
     },
   }
-}
-
-function resolveTheme(theme: string): string {
-  return SUPPORTED_THEME_NAMES.has(theme) ? theme : "default"
 }
 
 function styleTag(css: string): string {

@@ -16,19 +16,46 @@ const DOCUMENT: MindMapDocument = {
 }
 
 const CONFIG: PlugConfig = {
+  autoPreview: true,
   height: 520,
   fit: true,
 }
 
 describe("renderDocumentWidget", () => {
-  it("falls back to the bundled default theme when Obsidian stores an unavailable theme", () => {
+  it("preserves the theme stored by Obsidian", () => {
     const widget = renderDocumentWidget(DOCUMENT, CONFIG, {
       mindMapJs: "",
       mindMapCss: "",
       viewerCss: "",
     })
 
-    expect(widget.script).toContain('"template":"default"')
-    expect(widget.script).not.toContain("classic13")
+    expect(widget.script).toContain('"template":"classic13"')
+    expect(widget.script).not.toContain('"template":"default"')
+  })
+
+  it("uses the configured theme only when it is explicitly set", () => {
+    const widget = renderDocumentWidget(
+      DOCUMENT,
+      { ...CONFIG, theme: "classic" },
+      {
+        mindMapJs: "",
+        mindMapCss: "",
+        viewerCss: "",
+      },
+    )
+
+    expect(widget.script).toContain('"template":"classic"')
+  })
+
+  it("injects the viewer canvas background when the document has no background", () => {
+    const widget = renderDocumentWidget(DOCUMENT, CONFIG, {
+      mindMapJs: "",
+      mindMapCss: "",
+      viewerCss: "",
+    })
+
+    expect(widget.script).toContain(
+      "backgroundColor: data.theme.config.backgroundColor ?? canvasColor",
+    )
   })
 })

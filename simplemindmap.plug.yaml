@@ -10,3 +10,8 @@ functions:
     path: "./src/simplemindmap.ts:previewCurrentPage"
     command:
       name: "SimpleMindMap: Preview Current Page"
+  autoPreviewPage:
+    path: "./src/simplemindmap.ts:autoPreviewPage"
+    events:
+      - editor:pageLoaded
+      - editor:pageReloaded

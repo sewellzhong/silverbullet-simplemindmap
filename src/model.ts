@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const PlugConfigSchema = z.object({
+  autoPreview: z.boolean().default(true),
   height: z.number().int().min(160).max(2000).default(520),
   fit: z.boolean().default(true),
   theme: z.string().min(1).optional(),

@@ -98,4 +98,17 @@ describe("parseSmmPage", () => {
       expect(result.error.kind).toBe("missing_metadata")
     }
   })
+
+  it("parses the provided Obsidian sample page", async () => {
+    const pageText = await Bun.file("../../inbox/silverbullet插件现象/test.md").text()
+    const result = parseSmmPage(pageText)
+
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.value.layout).toBe("logicalStructure")
+      expect(result.value.theme.template).toBe("classic")
+      expect(result.value.root.data.text).toBe("<p>根节点</p>")
+      expect(result.value.root.children).toHaveLength(2)
+    }
+  })
 })

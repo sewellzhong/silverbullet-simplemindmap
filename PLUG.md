@@ -26,3 +26,15 @@ config.set {
   }
 }
 ```
+
+Optional configuration:
+
+```lua
+config.set {
+  simplemindmap = {
+    autoPreview = true,
+    height = 720,
+    fit = true
+  }
+}
+```
