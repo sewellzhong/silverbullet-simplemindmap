@@ -49,6 +49,10 @@ body {
   display: block;
 }
 
+.smm-node-note {
+  outline: none;
+}
+
 .smm-map foreignObject,
 .smm-map foreignObject * {
   box-sizing: border-box;
@@ -95,8 +99,37 @@ body {
   color: var(--smm-error);
 }
 
+.smm-note-tooltip {
+  position: fixed;
+  z-index: 20;
+  box-sizing: border-box;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 10px 12px;
+  border: 1px solid var(--smm-border);
+  border-radius: 6px;
+  background: var(--smm-surface-muted);
+  color: var(--smm-text);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+}
+
+.smm-note-tooltip-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .smm-state {
     transition: opacity 120ms ease-out;
+  }
+
+  .smm-note-tooltip {
+    transition:
+      opacity 120ms ease-out,
+      transform 120ms ease-out;
   }
 }

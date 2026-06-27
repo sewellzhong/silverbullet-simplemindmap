@@ -3,6 +3,8 @@ import { compressToBase64 } from "lz-string"
 
 import { parseMindMapDocument, parseSmmPage, parseSmmSections } from "../src/parser.ts"
 
+const NOTE_FIELD = "note"
+
 function encodedDocument(): string {
   return compressToBase64(
     JSON.stringify({
@@ -109,6 +111,17 @@ describe("parseSmmPage", () => {
       expect(result.value.theme.template).toBe("classic")
       expect(result.value.root.data.text).toBe("<p>根节点</p>")
       expect(result.value.root.children).toHaveLength(2)
+    }
+  })
+
+  it("preserves notes from the current Obsidian sample page", async () => {
+    const pageText = await Bun.file("../../inbox/silverbullet插件现象/社交沟通｜MM.md").text()
+    const result = parseSmmPage(pageText)
+
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      const noteNode = result.value.root.children.find((node) => node.data.text === "<p>测试</p>")
+      expect(noteNode?.data[NOTE_FIELD]).toBe("* test\n* tt")
     }
   })
 })

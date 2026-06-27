@@ -5,3 +5,8 @@ export type CodeWidgetContent = {
   readonly height?: number
   readonly url?: string
 }
+
+export type CodeWidgetCallback = (
+  bodyText: string,
+  pageName: string,
+) => Promise<CodeWidgetContent | null>

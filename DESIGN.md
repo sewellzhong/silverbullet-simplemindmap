@@ -43,6 +43,11 @@ Base unit: 4px. Viewer padding uses 16px, compact gaps use 8px, and status panel
 - Fallback: if parent-page access fails, leave the page intact and keep the mind map visible.
 - Fallback widget: empty `svgData` code widgets avoid large blank raw SVG panels when page-level hiding misses.
 
+### Note Tooltip
+- Structure: readonly node note icon with an iframe-local tooltip on hover.
+- Behavior: preserves Obsidian Simple Mind Map `note` text without exposing editing controls.
+- Fallback: if tooltip positioning fails, the node remains visible and the note icon still marks that note content exists.
+
 ## 6. Motion & Interaction
 
 Use only opacity transitions up to 150ms. Respect `prefers-reduced-motion`.

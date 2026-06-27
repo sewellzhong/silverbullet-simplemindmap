@@ -8,7 +8,10 @@ import { renderDocumentWidget, renderEmptyWidget, renderErrorWidget } from "./re
 
 const PLUG_NAME = "simplemindmap"
 
-export async function renderMetadata(bodyText: string): Promise<CodeWidgetContent | null> {
+export async function renderMetadata(
+  bodyText: string,
+  _pageName?: string,
+): Promise<CodeWidgetContent | null> {
   const [assets, config] = await Promise.all([readAssets(), readConfig()])
   const result = parseMindMapDocument(bodyText)
   if (!result.ok) {

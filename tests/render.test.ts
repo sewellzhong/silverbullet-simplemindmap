@@ -6,7 +6,12 @@ import { renderDocumentWidget } from "../src/render.ts"
 const DOCUMENT: MindMapDocument = {
   root: {
     data: { text: "Root" },
-    children: [],
+    children: [
+      {
+        data: { text: "Branch", note: "* test\n* tt" },
+        children: [],
+      },
+    ],
   },
   theme: {
     template: "classic13",
@@ -157,6 +162,22 @@ describe("renderDocumentWidget", () => {
     expect(widget.script).toContain("MutationObserver")
     expect(widget.script).toContain(".smm-source-hidden{display:none!important}")
     expect(widget.script).toContain('isSectionHeader(node, "metadata")')
+    expect(widget.script).toContain("hideEmbeddedImageErrors")
+    expect(widget.script).toContain(".smm-embed-image-files")
+    expect(widget.script).toContain("Failed to parse url")
+  })
+
+  it("renders note metadata with a visible readonly note affordance", () => {
+    const widget = renderDocumentWidget(DOCUMENT, CONFIG, {
+      mindMapJs: "",
+      mindMapCss: "",
+      viewerCss: "",
+    })
+
+    expect(widget.script).toContain('"note":"* test\\n* tt"')
+    expect(widget.script).toContain("noteIcon:")
+    expect(widget.script).toContain("nodeNoteTooltipZIndex")
+    expect(widget.html).toContain("smm-note-tooltip")
   })
 
   it("injects styles for rich text nodes rendered inside SVG foreignObject", () => {
