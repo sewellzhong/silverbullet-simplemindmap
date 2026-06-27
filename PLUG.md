@@ -7,7 +7,7 @@ files:
 
 # SilverBullet SimpleMindMap Plug
 
-Readonly rendering for Obsidian Simple mind map `.smm.md` pages.
+Readonly inline rendering for Obsidian Simple Mind Map pages.
 
 Install this library with `Library: Install`:
 
@@ -32,9 +32,10 @@ Optional configuration:
 ```lua
 config.set {
   simplemindmap = {
-    autoPreview = true,
     height = 720,
-    fit = true
+    fit = true,
+    minScale = 1.35,
+    hideSourceSections = true
   }
 }
 ```

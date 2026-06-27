@@ -33,9 +33,13 @@ Base unit: 4px. Viewer padding uses 16px, compact gaps use 8px, and status panel
 ## 5. Components
 
 ### Viewer Shell
-- Structure: one full-width iframe body with a resizable mind map container.
+- Structure: one full-width iframe body with a resizable inline mind map container.
 - States: loading, rendered, empty, error.
 - Accessibility: status states use readable text; the mind map is a readonly visual preview.
+
+### Source Section Hiding
+- Structure: DOM-only enhancement that hides Obsidian raw data sections in SilverBullet after the inline viewer renders.
+- Fallback: if parent-page access fails, leave the page intact and keep the mind map visible.
 
 ## 6. Motion & Interaction
 
