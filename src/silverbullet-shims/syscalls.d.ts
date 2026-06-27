@@ -9,3 +9,7 @@ export const asset: {
 export const system: {
   readonly getConfig: (key: string, defaultValue: unknown) => Promise<unknown>
 }
+
+export const markdown: {
+  readonly markdownToHtml: (markdownText: string) => Promise<string>
+}

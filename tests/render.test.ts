@@ -8,7 +8,11 @@ const DOCUMENT: MindMapDocument = {
     data: { text: "Root" },
     children: [
       {
-        data: { text: "Branch", note: "* test\n* tt" },
+        data: {
+          text: "Branch",
+          note: "* test\n* tt",
+          noteHtml: "<ul><li>test</li><li>tt</li></ul>",
+        },
         children: [],
       },
     ],
@@ -175,9 +179,22 @@ describe("renderDocumentWidget", () => {
     })
 
     expect(widget.script).toContain('"note":"* test\\n* tt"')
+    expect(widget.script).toContain('"noteHtml":"<ul><li>test</li><li>tt</li></ul>"')
     expect(widget.script).toContain("noteIcon:")
     expect(widget.script).toContain("nodeNoteTooltipZIndex")
+    expect(widget.script).toContain('node?.getData("noteHtml")')
+    expect(widget.script).toContain("noteTooltip.innerHTML = noteHtml")
     expect(widget.html).toContain("smm-note-tooltip")
+  })
+
+  it("injects styles for markdown rendered note tooltips", () => {
+    const widget = renderDocumentWidget(DOCUMENT, CONFIG, {
+      mindMapJs: "",
+      mindMapCss: "",
+      viewerCss: ".smm-note-tooltip ul { padding-left: 20px; }",
+    })
+
+    expect(widget.html).toContain(".smm-note-tooltip ul")
   })
 
   it("injects styles for rich text nodes rendered inside SVG foreignObject", () => {

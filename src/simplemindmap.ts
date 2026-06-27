@@ -1,7 +1,8 @@
-import { asset, system } from "@silverbulletmd/silverbullet/syscalls"
+import { asset, markdown, system } from "@silverbulletmd/silverbullet/syscalls"
 import type { CodeWidgetContent } from "@silverbulletmd/silverbullet/type/client"
 
 import { PlugConfigSchema } from "./model.ts"
+import { renderNoteMarkdown } from "./notes.ts"
 import { parseMindMapDocument } from "./parser.ts"
 import type { RenderAssets } from "./render.ts"
 import { renderDocumentWidget, renderEmptyWidget, renderErrorWidget } from "./render.ts"
@@ -20,7 +21,8 @@ export async function renderMetadata(
     }
     return renderErrorWidget(result.error, config.height, assets)
   }
-  return renderDocumentWidget(result.value, config, assets)
+  const document = await renderNoteMarkdown(result.value, markdown.markdownToHtml)
+  return renderDocumentWidget(document, config, assets)
 }
 
 export async function renderSvgData(): Promise<CodeWidgetContent> {

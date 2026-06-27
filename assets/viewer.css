@@ -59,14 +59,6 @@ body {
   opacity: 1;
 }
 
-.smm-map foreignObject p {
-  margin: 0;
-  color: inherit;
-  font: inherit;
-  line-height: inherit;
-  white-space: pre-wrap;
-}
-
 .smm-map foreignObject div {
   color: inherit;
   font-family: inherit;
@@ -111,10 +103,78 @@ body {
   color: var(--smm-text);
   font-size: 13px;
   line-height: 1.5;
-  white-space: pre-wrap;
   opacity: 0;
   pointer-events: none;
   transform: translateY(4px);
+}
+
+.smm-note-tooltip-plain {
+  white-space: pre-wrap;
+}
+
+.smm-note-tooltip > :first-child {
+  margin-top: 0;
+}
+
+.smm-note-tooltip > :last-child {
+  margin-bottom: 0;
+}
+
+.smm-note-tooltip p,
+.smm-note-tooltip ul,
+.smm-note-tooltip ol,
+.smm-note-tooltip blockquote,
+.smm-note-tooltip pre {
+  margin: 6px 0;
+}
+
+.smm-note-tooltip ul,
+.smm-note-tooltip ol {
+  padding-left: 20px;
+}
+
+.smm-note-tooltip li + li {
+  margin-top: 2px;
+}
+
+.smm-note-tooltip a {
+  color: var(--smm-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.smm-note-tooltip code {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--smm-border) 38%, transparent);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+  font-size: 0.92em;
+}
+
+.smm-note-tooltip pre {
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid var(--smm-border);
+  border-radius: 5px;
+}
+
+.smm-note-tooltip pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.smm-note-tooltip blockquote {
+  padding-left: 10px;
+  border-left: 3px solid var(--smm-border);
+  color: var(--smm-text-muted);
+}
+
+.smm-map foreignObject p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
 }
 
 .smm-note-tooltip-visible {

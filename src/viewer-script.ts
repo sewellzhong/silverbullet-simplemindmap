@@ -43,17 +43,27 @@ const mindMap = new MindMapCtor({
   },
   nodeNoteTooltipZIndex: 20,
   customNoteContentShow: {
-    show(note, left, top) {
+    show(note, left, top, node) {
       if (!noteTooltip) {
         return;
       }
-      noteTooltip.textContent = note;
+      const noteHtml = node?.getData("noteHtml");
+      noteTooltip.classList.toggle("smm-note-tooltip-plain", typeof noteHtml !== "string" || !noteHtml);
+      if (typeof noteHtml === "string" && noteHtml) {
+        noteTooltip.innerHTML = noteHtml;
+      } else {
+        noteTooltip.textContent = note;
+      }
       noteTooltip.style.left = left + "px";
       noteTooltip.style.top = top + "px";
       noteTooltip.classList.add("smm-note-tooltip-visible");
     },
     hide() {
-      noteTooltip?.classList.remove("smm-note-tooltip-visible");
+      if (!noteTooltip) {
+        return;
+      }
+      noteTooltip.classList.remove("smm-note-tooltip-visible", "smm-note-tooltip-plain");
+      noteTooltip.textContent = "";
     },
   },
 });
