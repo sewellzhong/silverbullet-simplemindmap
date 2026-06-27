@@ -40,13 +40,16 @@ config.set {
   simplemindmap = {
     height = 720,
     fit = true,
-    minScale = 1.35,
-    hideSourceSections = true
+    minScale = 0.9,
+    hideSourceSections = true,
+    readabilityOverrides = false
   }
 }
 ```
 
 `hideSourceSections` depends on SilverBullet's current page DOM. If a future SilverBullet release changes that structure, the map will still render but the raw Obsidian sections may become visible again until the plug is updated.
+
+`readabilityOverrides` is off by default so the viewer stays close to the styles saved by Obsidian. Enable it only when old notes render with text that is too small to read in SilverBullet.
 
 ## Build
 

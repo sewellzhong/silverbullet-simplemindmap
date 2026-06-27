@@ -4,7 +4,7 @@ import type { CodeWidgetContent } from "@silverbulletmd/silverbullet/type/client
 import { PlugConfigSchema } from "./model.ts"
 import { parseMindMapDocument } from "./parser.ts"
 import type { RenderAssets } from "./render.ts"
-import { renderDocumentWidget, renderErrorWidget } from "./render.ts"
+import { renderDocumentWidget, renderEmptyWidget, renderErrorWidget } from "./render.ts"
 
 const PLUG_NAME = "simplemindmap"
 
@@ -18,6 +18,14 @@ export async function renderMetadata(bodyText: string): Promise<CodeWidgetConten
     return renderErrorWidget(result.error, config.height, assets)
   }
   return renderDocumentWidget(result.value, config, assets)
+}
+
+export async function renderSvgData(): Promise<CodeWidgetContent> {
+  return renderEmptyWidget()
+}
+
+export async function renderSvgdata(): Promise<CodeWidgetContent> {
+  return renderEmptyWidget()
 }
 
 async function readAssets(): Promise<RenderAssets> {

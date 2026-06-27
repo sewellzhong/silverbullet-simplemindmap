@@ -6,3 +6,9 @@ functions:
   renderMetadata:
     path: "./src/simplemindmap.ts:renderMetadata"
     codeWidget: metadata
+  renderSvgData:
+    path: "./src/simplemindmap.ts:renderSvgData"
+    codeWidget: svgData
+  renderSvgdata:
+    path: "./src/simplemindmap.ts:renderSvgdata"
+    codeWidget: svgdata

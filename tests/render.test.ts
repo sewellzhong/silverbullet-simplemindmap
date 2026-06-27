@@ -18,8 +18,9 @@ const DOCUMENT: MindMapDocument = {
 const CONFIG: PlugConfig = {
   height: 720,
   fit: true,
-  minScale: 1.35,
+  minScale: 0.9,
   hideSourceSections: true,
+  readabilityOverrides: false,
 }
 
 describe("renderDocumentWidget", () => {
@@ -60,7 +61,29 @@ describe("renderDocumentWidget", () => {
     )
   })
 
-  it("adds readable theme defaults without overriding saved node styles", () => {
+  it("adds Obsidian classic theme defaults when the saved document omits theme config", () => {
+    const widget = renderDocumentWidget(
+      {
+        ...DOCUMENT,
+        theme: {
+          template: "classic",
+          config: {},
+        },
+      },
+      CONFIG,
+      {
+        mindMapJs: "",
+        mindMapCss: "",
+        viewerCss: "",
+      },
+    )
+
+    expect(widget.script).toContain('"fillColor":"rgb(233, 223, 152)"')
+    expect(widget.script).toContain('"fillColor":"rgb(164, 197, 192)"')
+    expect(widget.script).toContain('"color":"#fff","fontWeight":"bold"')
+  })
+
+  it("preserves saved node styles by default", () => {
     const widget = renderDocumentWidget(
       {
         ...DOCUMENT,
@@ -73,6 +96,31 @@ describe("renderDocumentWidget", () => {
         },
       },
       CONFIG,
+      {
+        mindMapJs: "",
+        mindMapCss: "",
+        viewerCss: "",
+      },
+    )
+
+    expect(widget.script).toContain('"root":{"fontSize":30}')
+    expect(widget.script).not.toContain('"second":{"fontSize":22}')
+    expect(widget.script).toContain('"node":{"color":"#333333"}')
+  })
+
+  it("adds readable theme defaults only when configured", () => {
+    const widget = renderDocumentWidget(
+      {
+        ...DOCUMENT,
+        theme: {
+          ...DOCUMENT.theme,
+          config: {
+            root: { fontSize: 30 },
+            node: { color: "#333333" },
+          },
+        },
+      },
+      { ...CONFIG, readabilityOverrides: true },
       {
         mindMapJs: "",
         mindMapCss: "",
@@ -105,9 +153,20 @@ describe("renderDocumentWidget", () => {
       viewerCss: "",
     })
 
-    expect(widget.script).toContain("hideSourceSections()")
+    expect(widget.script).toContain("scheduleSourceHiding()")
+    expect(widget.script).toContain("MutationObserver")
     expect(widget.script).toContain(".smm-source-hidden{display:none!important}")
     expect(widget.script).toContain('isSectionHeader(node, "metadata")')
+  })
+
+  it("injects styles for rich text nodes rendered inside SVG foreignObject", () => {
+    const widget = renderDocumentWidget(DOCUMENT, CONFIG, {
+      mindMapJs: "",
+      mindMapCss: "",
+      viewerCss: ".smm-map foreignObject p { margin: 0; color: inherit; }",
+    })
+
+    expect(widget.html).toContain(".smm-map foreignObject p")
   })
 
   it("infers the canvas background from the SilverBullet page theme", () => {

@@ -34,8 +34,9 @@ config.set {
   simplemindmap = {
     height = 720,
     fit = true,
-    minScale = 1.35,
-    hideSourceSections = true
+    minScale = 0.9,
+    hideSourceSections = true,
+    readabilityOverrides = false
   }
 }
 ```

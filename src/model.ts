@@ -3,8 +3,9 @@ import { z } from "zod"
 export const PlugConfigSchema = z.object({
   height: z.number().int().min(240).max(2000).default(720),
   fit: z.boolean().default(true),
-  minScale: z.number().min(0.2).max(2).default(1.35),
+  minScale: z.number().min(0.2).max(2).default(0.9),
   hideSourceSections: z.boolean().default(true),
+  readabilityOverrides: z.boolean().default(false),
   theme: z.string().min(1).optional(),
 })
 

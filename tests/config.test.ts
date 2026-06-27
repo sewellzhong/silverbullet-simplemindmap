@@ -9,8 +9,9 @@ describe("PlugConfigSchema", () => {
     expect(config).toEqual({
       height: 720,
       fit: true,
-      minScale: 1.35,
+      minScale: 0.9,
       hideSourceSections: true,
+      readabilityOverrides: false,
     })
     expect("autoPreview" in config).toBe(false)
   })
